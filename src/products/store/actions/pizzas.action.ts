@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { Pizza } from 'src/products/models/pizza.model';
+import { Pizza } from '../../models/pizza.model';
 
 export const LOAD_PIZZAS = '[Products] Load Pizzas';
 export const LOAD_PIZZAS_SUCCESS = '[Products] Load Pizzas Success';
@@ -11,10 +11,15 @@ export class LoadPizzas implements Action {
 
 export class LoadPizzasSuccess implements Action {
     readonly type = LOAD_PIZZAS_SUCCESS;
-    constructor(public payload: Pizza) {}
+    constructor(public payload: Pizza[]) {}
 }
 
 export class LoadPizzasFail implements Action {
     readonly type = LOAD_PIZZAS_FAIL;
     constructor(public payload: any) {}
 }
+
+export type PizzasActions =
+    | LoadPizzas
+    | LoadPizzasSuccess
+    | LoadPizzasFail;
