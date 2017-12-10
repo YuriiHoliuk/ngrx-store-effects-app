@@ -131,6 +131,32 @@
         }
       ],
       "id": 3
+    },
+    {
+      "name": "Hot pizza",
+      "toppings": [
+        {
+          "id": 5,
+          "name": "mozzarella"
+        },
+        {
+          "id": 4,
+          "name": "chili"
+        },
+        {
+          "id": 10,
+          "name": "pepperoni"
+        },
+        {
+          "id": 7,
+          "name": "olive"
+        },
+        {
+          "id": 3,
+          "name": "basil"
+        }
+      ],
+      "id": 4
     }
   ]
 }
