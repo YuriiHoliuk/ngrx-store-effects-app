@@ -49,3 +49,8 @@ export function reducer(
 
     return state;
 }
+
+export const getPizzasEntities = (state: PizzasState) => state.entities;
+export const getAllPizzas = (state: PizzasState) => Object.values(state.entities);
+export const getPizzasLoaded = (state: PizzasState) => state.loaded;
+export const getPizzasLoading = (state: PizzasState) => state.loading;
