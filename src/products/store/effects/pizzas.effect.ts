@@ -1,3 +1,4 @@
+import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
 
 import { map, switchMap, catchError } from 'rxjs/operators'
@@ -8,6 +9,7 @@ import * as pizzasActions from '../actions/pizzas.action';
 import { Pizza } from '../../models/pizza.model';
 import { PizzasService } from './../../services/pizzas.service';
 
+@Injectable()
 export class PizzasEffects {
     constructor(private actions$: Actions, private pizzasService: PizzasService) {}
 
