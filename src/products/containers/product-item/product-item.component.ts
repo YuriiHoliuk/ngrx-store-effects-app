@@ -1,11 +1,14 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { Pizza } from '../../models/pizza.model';
-import { PizzasService } from '../../services/pizzas.service';
+import { Store } from '@ngrx/store';
+import * as fromStore from '../../store';
 
+import { Observable } from 'rxjs/Observable';
+import { tap } from 'rxjs/operators';
+
+import { Pizza } from '../../models/pizza.model';
 import { Topping } from '../../models/topping.model';
-import { ToppingsService } from '../../services/toppings.service';
 
 @Component({
   selector: 'product-item',
@@ -14,30 +17,43 @@ import { ToppingsService } from '../../services/toppings.service';
     <div
       class="product-item">
       <pizza-form
-        [pizza]="pizza"
-        [toppings]="toppings"
+        [pizza]="pizza$ | async"
+        [toppings]="toppings$ | async"
         (selected)="onSelect($event)"
         (create)="onCreate($event)"
         (update)="onUpdate($event)"
         (remove)="onRemove($event)">
         <pizza-display
-          [pizza]="visualise">
+          [pizza]="visualised$ | async">
         </pizza-display>
       </pizza-form>
     </div>
   `,
 })
 export class ProductItemComponent implements OnInit {
-  pizza: Pizza;
-  visualise: Pizza;
-  toppings: Topping[];
+  pizza$: Observable<Pizza>;
+  visualised$: Observable<Pizza>;
+  toppings$: Observable<Topping[]>;
 
-  constructor() {}
+  constructor(private store: Store<fromStore.ProductsState>) {}
 
   ngOnInit() {
+    this.pizza$ = this.store.select(fromStore.getSelectedPizza).pipe(
+      tap((pizza: Pizza) => {
+        const pizzaExists = pizza && pizza.toppings;
+        const toppings = pizzaExists
+          ? pizza.toppings.map(({ id }) => id)
+          : [];
+
+        this.store.dispatch(new fromStore.SelectToppings(toppings));
+      })
+    );
+    this.toppings$ = this.store.select(fromStore.getAllToppings);
+    this.visualised$ = this.store.select(fromStore.getPizzaVizualized);
   }
 
   onSelect(event: number[]) {
+    this.store.dispatch(new fromStore.SelectToppings(event));
   }
 
   onCreate(event: Pizza) {

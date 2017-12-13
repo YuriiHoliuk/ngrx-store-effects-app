@@ -1,4 +1,3 @@
-import { PizzasState } from './pizzas.reducer';
 import { Pizza } from './../../models/pizza.model';
 import * as fromPizzas from '../actions/pizzas.action';
 import { toEntities } from '../../../utils/toEntities';
