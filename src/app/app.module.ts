@@ -25,7 +25,7 @@ export const metaReducers: MetaReducer<any>[] = !environment.production
 import { AppComponent } from './containers/app/app.component';
 
 // store
-import { reducers, CustomRouterStateSerializer } from './store';
+import { reducers, CustomRouterStateSerializer, effects } from './store';
 
 // routes
 export const ROUTES: Routes = [
@@ -42,7 +42,7 @@ export const ROUTES: Routes = [
     BrowserAnimationsModule,
     RouterModule.forRoot(ROUTES),
     StoreModule.forRoot(reducers, { metaReducers }),
-    EffectsModule.forRoot([]),
+    EffectsModule.forRoot(effects),
     StoreRouterConnectingModule,
     environment.development ? StoreDevtoolsModule.instrument() : [],
   ],

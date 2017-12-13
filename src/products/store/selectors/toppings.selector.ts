@@ -16,8 +16,8 @@ export const getToppingsEntities = createSelector(
 );
 
 export const getAllToppings = createSelector(
-    getToppingsState,
-    fromToppings.getAllToppings
+    getToppingsEntities,
+    (entities: { [key: number]: Topping }) => Object.values(entities)
 );
 
 export const getToppingsLoaded = createSelector(
