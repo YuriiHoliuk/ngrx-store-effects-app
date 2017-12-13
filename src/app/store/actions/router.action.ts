@@ -7,12 +7,12 @@ export const FORWARD = '[Router] forward';
 
 export class Go implements Action {
   readonly type = GO;
-  constructor(public payload: { url: string[], queryParams: Params, navigationExtras: NavigationExtras }) {}
+  constructor(public payload: { url: string[], queryParams?: Params, navigationExtras?: NavigationExtras }) {}
 }
 
 export class Back implements Action {
   readonly type = BACK;
-  constructor(public payload: { url: string[], queryParams: Params, navigationExtras: NavigationExtras }) {}
+  constructor() {}
 }
 
 export class Forward implements Action {

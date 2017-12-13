@@ -1,5 +1,4 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
 
 import { Store } from '@ngrx/store';
 import * as fromStore from '../../store';
